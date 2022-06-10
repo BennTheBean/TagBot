@@ -2,7 +2,7 @@ import discord
 import gspread
 import os
 
-sa = gspread.service_account(filename=".\Bot\Ev\tag-scores-c365003a50fb.json")
+sa = gspread.service_account(filename="./Bot/Ev/tag-scores-c365003a50fb.json")
 sh = sa.open("tagscores")
 
 wks = sh.worksheet("Data")
