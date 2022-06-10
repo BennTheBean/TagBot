@@ -1,8 +1,8 @@
 import discord
 import gspread
+import os
 
-TOKEN = "OTgzNTUxOTcwNzk3MzAxNzgw.G-lUr6.tYJnZIOgCZqV4n9ivMAKVwl1e0NN0gwiJqZwd8"
-sa = gspread.service_account(filename="TagBot/Bot/Ev/tag-scores-c365003a50fb.json")
+sa = gspread.service_account(filename="C:/Users/madsc/OneDrive/Desktop/New folder (2)/Python/EzSheets/Ev/tag-scores-c365003a50fb.json")
 sh = sa.open("tagscores")
 
 wks = sh.worksheet("Data")
@@ -26,6 +26,7 @@ def annoyingstuff(tagger, tagged):
   cell2 = wks.find(tagged)
   current = wks.acell(chr(cell2.col+64)+str(cell.row)).value
   wks.update_acell(chr(cell2.col+64)+str(cell.row), str(int(current) + 1))
+
 client = discord.Client()
 
 @client.event
@@ -47,4 +48,4 @@ async def on_message(message):
       tagged = message.content.split(" ",2)[2]
       await message.channel.send("<@&984069096872222770> " + tagger + " Tagged " + tagged)
       annoyingstuff(tagger.lower(), tagged.lower())
-client.run(TOKEN)
+client.run(os.environ['DISCORD_TOKEN'])
