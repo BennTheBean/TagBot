@@ -2,7 +2,7 @@ import discord
 import gspread
 
 TOKEN = "OTgzNTUxOTcwNzk3MzAxNzgw.G-lUr6.tYJnZIOgCZqV4n9ivMAKVwl1e0NN0gwiJqZwd8"
-sa = gspread.service_account(filename="C:/Users/madsc/OneDrive/Desktop/New folder (2)/Python/EzSheets/Ev/tag-scores-c365003a50fb.json")
+sa = gspread.service_account(filename="TagBot/Bot/Ev/tag-scores-c365003a50fb.json")
 sh = sa.open("tagscores")
 
 wks = sh.worksheet("Data")
