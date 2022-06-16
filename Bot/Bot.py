@@ -36,10 +36,10 @@ async def on_message(message):
 
   if message.content.startswith('!leader'):
         update()
-        leaderboard = discord.Embed(title="Leaderboard")
+        leaderboard=discord.Embed(title="Leaderboard",color=discord.Color.blue())
         for i in range(len(tagdata)):
             leaderboard.add_field(str(i+1) + ". " + order[i])
-        await message.channel.send(leaderboard)
+        await message.channel.send(embed=leaderboard)
   elif message.content.startswith('!tag'):
       tagger = message.content.split(" ",2)[1]
       tagged = message.content.split(" ",2)[2]
