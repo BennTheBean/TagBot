@@ -38,7 +38,8 @@ async def on_message(message):
         update()
         leaderboard=discord.Embed(title="Leaderboard",color=discord.Color.blue())
         for i in range(len(tagdata)):
-            leaderboard.add_field(name=str(i+1)+ ".", value=order[i], inline=False) 
+            leaderboard.add_field(name="\u200b", value=str(i+1)+ ". "+order[i], inline=False) #stupid names fixed with unicode thingy
+        leaderboard.set_footer(text="L Bozos #OwenSweep")
         await message.channel.send(embed=leaderboard)
   elif message.content.startswith('!tag'):
       tagger = message.content.split(" ",2)[1]
