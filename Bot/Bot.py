@@ -38,7 +38,7 @@ async def on_message(message):
         update()
         leaderboard=discord.Embed(title="Leaderboard",color=discord.Color.blue())
         for i in range(len(tagdata)):
-            leaderboard.add_field(name=" ", value=str(i+1)+ ". " + order[i], inline=False) 
+            leaderboard.add_field(name="\n", value=str(i+1)+ ". " + order[i], inline=False) 
         await message.channel.send(embed=leaderboard)
   elif message.content.startswith('!tag'):
       tagger = message.content.split(" ",2)[1]
