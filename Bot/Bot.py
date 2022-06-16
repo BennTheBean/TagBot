@@ -8,9 +8,7 @@ sh = sa.open("tagscores")
 wks = sh.worksheet("Data")
 wks2 = sh.worksheet("Leader")
 
-tagdata = {
-  "Empty":0
-}
+tagdata = {"Empty":0}
 order = sorted(tagdata, key=tagdata.get, reverse=False)
 
 def update():
@@ -20,7 +18,9 @@ def update():
           tagdata[wks.acell('A' + str(i+20)).value + ": " + str(wks.acell('C' + str(i+20)).value)] = wks.acell('C' + str(i+20)).value
   order.clear()
   order = sorted(tagdata, key=tagdata.get, reverse=False)
-  
+  for i in range(len(order)):
+          wks2.update_acell('B' + str(i+2), order[i])
+
 def annoyingstuff(tagger, tagged):
   cell = wks.find(tagger+".")
   cell2 = wks.find(tagged)
@@ -33,14 +33,13 @@ client = discord.Client()
 async def on_message(message):
   if message.author == client.user:
     return
+
   if message.content.startswith('!leader'):
         update()
+        leaderboard = discord.Embed(title="Leaderboard")
         for i in range(len(tagdata)):
-            await message.channel.send(str(i+1) + ". " + order[i])
-  elif message.content.startswith('!update'):
-        update()
-        for i in range(len(tagdata)):
-          wks2.update_acell('B' + str(i+2), order[i])
+            leaderboard.add_field(str(i+1) + ". " + order[i])
+        await message.channel.send(leaderboard)
   elif message.content.startswith('!tag'):
       tagger = message.content.split(" ",2)[1]
       tagged = message.content.split(" ",2)[2]
